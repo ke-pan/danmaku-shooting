@@ -1,19 +1,20 @@
 {
-  "name": "danmaku_shooting",
-  "version": "0.0.1",
-  "description": "弹幕视频上的打飞机",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "danmaku",
-    "shooting"
-  ],
-  "author": "ke-pan",
-  "license": "MIT",
-  "devDependencies": {
-    "node-libs-browser": "^0.5.2",
-    "webpack": "^1.12.1"
-  }
+    "name": "danmaku_shooting",
+    "version": "0.0.1",
+    "description": "弹幕视频上的打飞机",
+    "main": "index.js",
+    "repository": "https://github.com/ke-pan/danmaku-shooting.git"
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "danmaku",
+        "shooting"
+    ],
+    "author": "ke-pan",
+    "license": "MIT",
+    "devDependencies": {
+        "node-libs-browser": "^0.5.2",
+        "webpack": "^1.12.1"
+    }
 }
