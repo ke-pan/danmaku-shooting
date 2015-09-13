@@ -3,9 +3,15 @@
     <head>
         <meta charset="utf-8">
         <title>Danmaku Shooting Demo</title>
+        <link rel="stylesheet" href="./app/css/index.css">
     </head>
     <body>
-        <canvas id="canvas" width="300" height="300"></canvas>
+        <div class="content">
+            <video id = "video" src="./app/video/demo.mp4" width="960" height="540" autoplay controls>
+                <p> Please use a modern browser. </p>
+            </video>
+            <canvas id="canvas" width="960" height="500"></canvas>
+        </div>
         <script src="./app/main.js"> </script>
     </body>
 </html>

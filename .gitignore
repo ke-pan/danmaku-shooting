@@ -1,3 +1,4 @@
-node_modules
+node_modules/
+video/
 *.log
 .DS_Store
