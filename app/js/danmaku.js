@@ -7,6 +7,7 @@ function Danmaku(context) {
 Danmaku.prototype.draw = function() {
     this.context.font = this.font
     this.context.fillStyle = this.color
+    this.context.textBaseline = "top"
     this.context.fillText(this.word.content, this.x, this.y)
 }
 
@@ -18,13 +19,15 @@ Danmaku.prototype.reset = function() {
     this.alive = false
 };
 
-Danmaku.prototype.init = function(word) {
+Danmaku.prototype.init = function(word, y) {
+    this.alive = true
     this.word = word
+    this.font = word.size + 'px sans-serif'
+    this.context.font = this.font
     this.width = this.context.measureText(word.content).width
     this.height = parseInt(word.size) + 1
     this.x = this.context.canvas.width
-    this.y = 0
-    this.font = word.size + 'px'
+    this.y = y
     this.color = '#' + word.color.toString(16);
     this.fly()
 }

@@ -1,9 +1,9 @@
-function Pool(num, constructor, image, context) {
+function Pool(num, constructor, context, image) {
     this.pool = []
     this.size = num
 
     for (var i = 0; i < num; i++) {
-        this.pool[i] = new constructor(image, context)
+        this.pool[i] = new constructor(context, image)
     }
 }
 

@@ -1,3 +1,15 @@
+var words = [{
+    content: '23333',
+    stime: 10.12,
+    size: '24',
+    color: 16777215
+}, {
+    content: '66666',
+    stime: 0.123,
+    size: '24',
+    color: 16777215
+}]
+
 var video = document.getElementById('video')
 var danmakuCanvas = document.getElementById('main')
 var danmakuCtx = danmakuCanvas.getContext('2d')
@@ -6,10 +18,12 @@ var shipCanvas = document.getElementById('ship')
 var shipCtx = shipCanvas.getContext('2d')
 
 var bulletImage = new Image(12, 12)
-var bulletPool = new Pool(20, Bullet, bulletImage, bulletCtx)
+var bulletPool = new Pool(20, Bullet, bulletCtx, bulletImage)
 Ship.prototype.bullets = bulletPool
 var shipImage = new Image(24, 24)
 var ship = new Ship(shipImage, shipCtx)
+DanmakuController.prototype.pool = new Pool(100, Danmaku, danmakuCtx)
+var danmakuController = new DanmakuController(words, 5, danmakuCanvas.width);
 
 
 shipImage.onload = function() {
@@ -19,7 +33,9 @@ shipImage.onload = function() {
 bulletImage.src = './app/images/bullet.png'
 shipImage.src = './app/images/ship.png'
 
-
+video.addEventListener('timeupdate', function() {
+    danmakuController.load.call(danmakuController, video.currentTime)
+}, false);
 
 KEY_CODES = {
     32: 'space',

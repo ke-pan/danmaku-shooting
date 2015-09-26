@@ -1,4 +1,4 @@
-function Bullet(image, context) {
+function Bullet(context, image) {
     this.image = image
     this.context = context
     this.width = image.width
