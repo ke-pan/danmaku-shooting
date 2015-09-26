@@ -4,7 +4,7 @@ function Ship(image, context) {
     this.width = image.width
     this.height = image.height
     this.speed = 3
-    this.shootRate = 15
+    this.shootRate = 12
     this.counter = 0
 }
 
@@ -76,7 +76,8 @@ Ship.prototype.fire = function() {
     this.counter++;
     if (this.counter > this.shootRate) {
         var bullet = this.bullets.get()
-        bullet.init(this.x + this.width, this.y + this.height / 2)
+        bullet.init(this.x + this.width,
+            this.y + (this.height - bullet.height) / 2)
         this.bullets.put(bullet)
         this.counter = 0
     }

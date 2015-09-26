@@ -6,7 +6,7 @@ var shipCanvas = document.getElementById('ship')
 var shipCtx = shipCanvas.getContext('2d')
 
 var bulletImage = new Image(12, 12)
-var bulletPool = new Pool(100, Bullet, bulletImage, bulletCtx)
+var bulletPool = new Pool(20, Bullet, bulletImage, bulletCtx)
 Ship.prototype.bullets = bulletPool
 var shipImage = new Image(24, 24)
 var ship = new Ship(shipImage, shipCtx)

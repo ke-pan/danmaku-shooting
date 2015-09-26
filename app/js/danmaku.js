@@ -1,76 +1,46 @@
-var words = [{
-    content: '23333',
-    stime: 10.12,
-    size: '24',
-    color: 16777215
-}, {
-    content: '66666',
-    stime: 0.123,
-    size: '24',
-    color: 16777215
-}]
+function Danmaku(context) {
+    this.context = context
+    this.alive = false
+    this.speed = 5
+}
 
-var flyingWordArrays = [
-    [],
-    [],
-    [],
-    []
-];
+Danmaku.prototype.draw = function() {
+    this.context.font = this.font
+    this.context.fillStyle = this.color
+    this.context.fillText(this.word.content, this.x, this.y)
+}
 
-var video = document.getElementById('video');
-var canvas = document.getElementById('main');
-var ctx = canvas.getContext('2d');
-var x = canvas.width + 10;
+Danmaku.prototype.clear = function() {
+    this.context.clearRect(this.x, this.y, this.width, this.height)
+}
 
-words.sort(function(a, b) {
-    return a.stime - b.stime;
-});
+Danmaku.prototype.reset = function() {
+    this.alive = false
+};
 
-function load() {
-    while (words.length > 0 && words[0].stime < video.currentTime) {
-        for (var j = 0; j < flyingWordArrays.length; j++) {
-            if (flyingWordArrays[j].length == 0) {
-                flyingWordArrays[j].push(words[0]);
-                break;
-            }
-            var last = flyingWordArrays[j][flyingWordArrays[j].length - 1];
-            if (last.x && last.x + last.width < canvas.width + 10) {
-                flyingWordArrays[j].push(words[0]);
-                break;
-            }
-        }
-        words.shift();
+Danmaku.prototype.init = function(word) {
+    this.word = word
+    this.width = this.context.measureText(word.content).width
+    this.height = parseInt(word.size) + 1
+    this.x = this.context.canvas.width
+    this.y = 0
+    this.font = word.size + 'px'
+    this.color = '#' + word.color.toString(16);
+    this.fly()
+}
+
+Danmaku.prototype.fly = function() {
+    this.clear()
+    this.x = this.x - this.speed
+    if (this.x + this.width < 0) {
+        this.alive = false
     }
+    else {
+        this.draw()
+    }
+
+    if (this.alive) {
+        requestAnimationFrame(this.fly.bind(this))
+    }
+
 }
-
-
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    flyingWordArrays.forEach(function(flyingWords, i) {
-        flyingWords.forEach(function(e) {
-            ctx.font = e.size + 'px serif';
-            ctx.fillStyle = '#' + e.color.toString(16);
-            if (e.x) {
-                e.x = e.x - 3;
-            }
-            else {
-                e.x = canvas.width + 10;
-            }
-            if (e.width === undefined) {
-                e.width = ctx.measureText(e.content).width;
-            }
-            ctx.fillText(e.content, e.x, 24 + 30 * i);
-        });
-        if (flyingWords.length > 0 && flyingWords[0].x + flyingWords.width <
-            0) {
-            flyingWords.shift;
-        }
-    });
-    requestAnimationFrame(draw);
-}
-
-video.addEventListener('timeupdate', load, false);
-
-
-
-draw();
