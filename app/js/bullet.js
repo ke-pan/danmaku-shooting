@@ -1,4 +1,4 @@
-function Bullet() {
+function Bullet(image, context) {
     this.image = image
     this.context = context
     this.width = image.width
@@ -9,11 +9,11 @@ function Bullet() {
     this.alive = false
 }
 
-Ship.prototype.draw = function() {
+Bullet.prototype.draw = function() {
     this.context.drawImage(this.image, this.x, this.y)
 };
 
-Ship.prototype.clear = function() {
+Bullet.prototype.clear = function() {
     this.context.clearRect(this.x, this.y, this.width, this.height)
 };
 

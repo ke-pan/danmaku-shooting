@@ -1,15 +1,22 @@
 var video = document.getElementById('video')
 var danmakuCanvas = document.getElementById('main')
 var danmakuCtx = danmakuCanvas.getContext('2d')
+var bulletCtx = danmakuCtx
 var shipCanvas = document.getElementById('ship')
 var shipCtx = shipCanvas.getContext('2d')
 
+var bulletImage = new Image(12, 12)
+var bulletPool = new Pool(100, Bullet, bulletImage, bulletCtx)
+Ship.prototype.bullets = bulletPool
 var shipImage = new Image(24, 24)
 var ship = new Ship(shipImage, shipCtx)
+
+
 shipImage.onload = function() {
     ship.init(10, 100)
     ship.act()
 }
+bulletImage.src = './app/images/bullet.png'
 shipImage.src = './app/images/ship.png'
 
 

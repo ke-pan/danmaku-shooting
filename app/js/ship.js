@@ -67,11 +67,17 @@ Ship.prototype.act = function() {
     this.move(dx, dy)
 
     if (KEY_STATUS.space) {
-        this.fire
+        this.fire()
     }
     requestAnimationFrame(this.act.bind(this))
 };
 
 Ship.prototype.fire = function() {
-
+    this.counter++;
+    if (this.counter > this.shootRate) {
+        var bullet = this.bullets.get()
+        bullet.init(this.x + this.width, this.y + this.height / 2)
+        this.bullets.put(bullet)
+        this.counter = 0
+    }
 };
