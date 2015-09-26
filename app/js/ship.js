@@ -9,8 +9,9 @@ function Ship(image, context) {
 }
 
 Ship.prototype.init = function(x, y) {
-    this.x = x;
-    this.y = y;
+    this.x = x
+    this.y = y
+    this.draw()
 };
 
 Ship.prototype.draw = function() {
@@ -22,25 +23,28 @@ Ship.prototype.clear = function() {
 };
 
 Ship.prototype.move = function(dx, dy) {
-    this.clear()
-        // x
-    this.x += dx
-    if (this.x < 0) {
-        this.x = 0
-    }
-    else if (this.x + this.width > this.context.width) {
-        this.x = this.context.width - this.width
-    }
-    // y
-    this.y += dy
-    if (this.y < 0) {
-        this.y = 0
-    }
-    else if (this.y + this.height > this.context.height) {
-        this.y = this.context.height - this.height
+    if (dx !== 0 || dy !== 0) {
+        this.clear()
+            // x
+        this.x += dx
+        if (this.x < 0) {
+            this.x = 0
+        }
+        else if (this.x + this.width > this.context.canvas.width) {
+            this.x = this.context.canvas.width - this.width
+        }
+        // y
+        this.y += dy
+        if (this.y < 0) {
+            this.y = 0
+        }
+        else if (this.y + this.height > this.context.canvas.height) {
+            this.y = this.context.canvas.height - this.height
+        }
+
+        this.draw()
     }
 
-    this.draw()
 };
 
 Ship.prototype.act = function() {
@@ -65,6 +69,7 @@ Ship.prototype.act = function() {
     if (KEY_STATUS.space) {
         this.fire
     }
+    requestAnimationFrame(this.act.bind(this))
 };
 
 Ship.prototype.fire = function() {
