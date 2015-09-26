@@ -18,7 +18,7 @@ var flyingWordArrays = [
 ];
 
 var video = document.getElementById('video');
-var canvas = document.getElementById('canvas');
+var canvas = document.getElementById('main');
 var ctx = canvas.getContext('2d');
 var x = canvas.width + 10;
 
@@ -66,9 +66,11 @@ function draw() {
             flyingWords.shift;
         }
     });
-    setTimeout(draw, 10);
+    requestAnimationFrame(draw);
 }
 
 video.addEventListener('timeupdate', load, false);
+
+
 
 draw();
