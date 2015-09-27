@@ -43,3 +43,5 @@ Bullet.prototype.fly = function() {
         requestAnimationFrame(this.fly.bind(this))
     }
 }
+
+module.exports = Bullet

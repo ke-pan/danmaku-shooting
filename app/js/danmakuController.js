@@ -30,3 +30,6 @@ DanmakuController.prototype.load = function(time) {
         }
     }
 };
+
+
+module.exports = DanmakuController

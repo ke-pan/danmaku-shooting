@@ -10,6 +10,12 @@ var words = [{
     color: 16777215
 }]
 
+var Pool = require("./js/pool")
+var Bullet = require("./js/bullet")
+var Danmaku = require("./js/danmaku")
+var DanmakuController = require("./js/danmakuController")
+var Ship = require("./js/ship")
+
 var video = document.getElementById('video')
 var danmakuCanvas = document.getElementById('main')
 var danmakuCtx = danmakuCanvas.getContext('2d')

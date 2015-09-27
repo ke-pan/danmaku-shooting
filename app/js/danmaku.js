@@ -47,3 +47,5 @@ Danmaku.prototype.fly = function() {
     }
 
 }
+
+module.exports = Danmaku

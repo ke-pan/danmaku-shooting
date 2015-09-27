@@ -82,3 +82,5 @@ Ship.prototype.fire = function() {
         this.counter = 0
     }
 };
+
+module.exports = Ship

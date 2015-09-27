@@ -19,3 +19,5 @@ Pool.prototype.get = function() {
 Pool.prototype.put = function(obj) {
     this.pool.unshift(obj)
 };
+
+module.exports = Pool
