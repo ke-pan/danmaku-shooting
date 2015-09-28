@@ -1,15 +1,4 @@
-var words = [{
-    content: '23333',
-    stime: 10.12,
-    size: '24',
-    color: 16777215
-}, {
-    content: '66666',
-    stime: 0.123,
-    size: '24',
-    color: 16777215
-}]
-
+var words = require("./danmaku/danmaku.json")
 var Pool = require("./js/pool")
 var Bullet = require("./js/bullet")
 var Danmaku = require("./js/danmaku")
@@ -22,15 +11,23 @@ var danmakuCtx = danmakuCanvas.getContext('2d')
 var bulletCtx = danmakuCtx
 var shipCanvas = document.getElementById('ship')
 var shipCtx = shipCanvas.getContext('2d')
+var gameoverText = document.getElementById('gameover')
 
 var bulletImage = new Image(12, 12)
-var bulletPool = new Pool(20, Bullet, bulletCtx, bulletImage)
-Ship.prototype.bullets = bulletPool
+var bulletPool = new Pool(30, Bullet, bulletCtx, bulletImage)
 var shipImage = new Image(24, 24)
 var ship = new Ship(shipImage, shipCtx)
-DanmakuController.prototype.pool = new Pool(100, Danmaku, danmakuCtx)
-var danmakuController = new DanmakuController(words, 5, danmakuCanvas.width);
+var danmakuPool = new Pool(100, Danmaku, danmakuCtx)
+var danmakuController = new DanmakuController(words, 12, danmakuCanvas.width);
 
+ship.bullets = bulletPool
+danmakuController.pool = danmakuPool
+ship.collideWith = danmakuPool
+Bullet.prototype.collideWith = danmakuPool
+
+ship.gameover = function() {
+    gameoverText.style.display = 'block'
+}
 
 shipImage.onload = function() {
     ship.init(10, 100)

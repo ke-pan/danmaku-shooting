@@ -14,10 +14,20 @@ Pool.prototype.get = function() {
     else {
         return false
     }
-};
+}
 
 Pool.prototype.put = function(obj) {
     this.pool.unshift(obj)
-};
+}
+
+Pool.prototype.getObjects = function() {
+    obj = []
+    for (var i = 0; i < this.size; i++) {
+        if (this.pool[i].alive) {
+            obj.push(this.pool[i])
+        }
+    }
+    return obj
+}
 
 module.exports = Pool

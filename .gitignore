@@ -1,4 +1,5 @@
 node_modules/
 video/
+danmaku/
 *.log
 .DS_Store

@@ -6,14 +6,18 @@ function Ship(image, context) {
     this.speed = 3
     this.shootRate = 12
     this.counter = 0
+    this.alive = false
 }
 
 Ship.prototype.init = function(x, y) {
     this.x = x
     this.y = y
+    this.alive = true
+    this.isColliding = false
     this.draw()
 };
 
+// TODO inherit
 Ship.prototype.draw = function() {
     this.context.drawImage(this.image, this.x, this.y)
 };
@@ -69,7 +73,14 @@ Ship.prototype.act = function() {
     if (KEY_STATUS.space) {
         this.fire()
     }
-    requestAnimationFrame(this.act.bind(this))
+    this.detectCollision()
+    if (this.isColliding) {
+        this.clear()
+        this.gameover()
+    }
+    else if (this.alive) {
+        requestAnimationFrame(this.act.bind(this))
+    }
 };
 
 Ship.prototype.fire = function() {
@@ -82,5 +93,21 @@ Ship.prototype.fire = function() {
         this.counter = 0
     }
 };
+
+// TODO MIXIN
+Ship.prototype.detectCollision = function() {
+    var obj = this.collideWith.getObjects()
+    for (var i = 0; i < obj.length; i++) {
+        if (this.x < obj[i].x + obj[i].width &&
+            this.x + this.width > obj[i].x &&
+            this.y < obj[i].y + obj[i].height &&
+            this.y + this.height > obj[i].y) {
+
+            this.alive = obj[i].alive = false
+            this.isColliding = obj[i].isColliding = true
+            break
+        }
+    }
+}
 
 module.exports = Ship
